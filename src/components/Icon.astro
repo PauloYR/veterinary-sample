@@ -1,0 +1,9 @@
+---
+// Bootstrap Icons (pacote público), SVG local inlinado em build.
+interface Props { name: string; class?: string }
+const { name, class: className = 'size-6' } = Astro.props;
+const files = import.meta.glob('/node_modules/bootstrap-icons/icons/*.svg', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const raw = files[`/node_modules/bootstrap-icons/icons/${name}.svg`] ?? '';
+const svg = raw.replace('<svg', `<svg class="${className}" aria-hidden="true" focusable="false"`);
+---
+<Fragment set:html={svg} />

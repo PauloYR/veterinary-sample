@@ -1,0 +1,165 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/figtree';
+import '../styles/global.css';
+import { existsSync } from 'node:fs';
+import Icon from '../components/Icon.astro';
+
+const clinic = 'Patas & Prosa';
+const whats = 'https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20agendar%20uma%20consulta.';
+const hasPhoto = existsSync('public/hero.jpg');
+
+const nav = [
+  ['Serviços', '#servicos'],
+  ['Primeira consulta', '#consulta'],
+  ['Equipe', '#equipe'],
+  ['Contato', '#contato'],
+];
+
+// bento: tamanho/cor variam de propósito (não é grade 3x2 uniforme)
+const services = [
+  { t: 'Vacinação', d: 'Protocolos completos para filhotes, adultos e idosos, com carteirinha digital.', i: 'shield-plus', c: 'bg-caramel text-cream md:col-span-2' },
+  { t: 'Banho & tosa', d: 'Cuidado sem estresse, com produtos suaves.', i: 'droplet-half', c: 'bg-sand text-ink' },
+  { t: 'Cirurgia', d: 'Centro cirúrgico com monitoramento anestésico.', i: 'heart-pulse', c: 'bg-plum text-cream' },
+  { t: 'Check-up', d: 'Exames de rotina e acompanhamento preventivo.', i: 'clipboard2-pulse', c: 'bg-white text-ink' },
+  { t: 'Emergência', d: 'Atendimento rápido quando cada minuto conta.', i: 'lightning-charge', c: 'bg-plum-dk text-cream md:col-span-2' },
+];
+
+const steps = [
+  ['calendar2-check', 'Agende', 'Pelo WhatsApp, em poucos minutos.'],
+  ['chat-heart', 'Conversa', 'Ouvimos a rotina e o histórico do seu pet.'],
+  ['stethoscope', 'Exame', 'Avaliação completa, sem pressa.'],
+  ['file-earmark-medical', 'Plano', 'Você sai com um plano claro e receita digital.'],
+];
+
+const team = [
+  ['Dra. Helena Duarte', 'Clínica geral', '/team/helena.jpg', 'object-[50%_28%]', 'Veterinária de jaleco branco com um spitz alemão na mesa de exame'],
+  ['Dr. Caio Menezes', 'Cirurgia', '/team/caio.jpg', 'object-[50%_25%]', 'Veterinário de uniforme azul com estetoscópio segurando um spitz alemão'],
+  ['Dra. Marina Lopes', 'Felinos', '/team/marina.jpg', 'object-[50%_30%]', 'Veterinária sorrindo com um gatinho no colo'],
+];
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{clinic} · Clínica Veterinária</title>
+    <meta name="description" content="Clínica veterinária com atendimento acolhedor: consultas, vacinas, cirurgias e banho & tosa. Agende pelo WhatsApp." />
+    <meta name="theme-color" content="#a9803f" />
+  </head>
+  <body class="pb-24 md:pb-0">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#d9b36a] via-[#c79a52] to-cream">
+      <header class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a href="#" class="flex items-center gap-2 font-display text-xl font-semibold text-plum-dk">
+          <Icon name="balloon-heart-fill" class="size-6" />{clinic}
+        </a>
+        <nav class="hidden items-center gap-7 text-sm font-medium text-plum-dk md:flex" aria-label="Principal">
+          {nav.map(([l, h]) => <a href={h} class="transition-opacity hover:opacity-60">{l}</a>)}
+        </nav>
+        <a href={whats} class="btn btn-light hidden md:inline-flex">Agendar</a>
+      </header>
+
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-0 pt-8 md:grid-cols-2 md:pt-14">
+        <div class="rise text-center text-plum-dk md:text-left">
+          <p class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/50 px-4 py-1.5 text-sm font-semibold backdrop-blur">
+            <Icon name="geo-alt-fill" class="size-4" /> Atendimento com hora marcada e sem fila
+          </p>
+          <h1 class="text-5xl font-semibold text-white drop-shadow-sm sm:text-6xl lg:text-7xl">
+            Quem ama, <em class="font-normal italic">cuida</em> de perto.
+          </h1>
+          <p class="mx-auto mt-5 max-w-md text-lg md:mx-0">
+            Medicina veterinária humana e atenta, do primeiro banho ao check-up da melhor idade.
+          </p>
+          <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
+            <a href={whats} class="btn btn-solid"><Icon name="whatsapp" class="size-5" /> Agendar consulta</a>
+            <a href="#servicos" class="btn btn-light">Ver serviços</a>
+          </div>
+        </div>
+
+        <!-- Janela em arco -->
+        <div class="rise relative mx-auto w-full max-w-sm [animation-delay:150ms] md:max-w-none">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-t-[999px] bg-gradient-to-b from-sand to-[#f3e3c7] ring-8 ring-white/40">
+            {hasPhoto
+              ? <img src="/hero.jpg" alt="Veterinária de luvas examinando com carinho um cachorro caramelo" class="size-full object-cover object-[45%_center]" fetchpriority="high" />
+              : <div class="grid size-full place-items-center text-caramel-dk/60"><Icon name="emoji-smile" class="size-32" /></div>}
+          </div>
+          <div class="absolute -left-2 bottom-8 flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-lg backdrop-blur sm:-left-6">
+            <span class="grid size-10 place-items-center rounded-full bg-caramel text-cream"><Icon name="clock-history" class="size-5" /></span>
+            <span class="text-sm leading-tight"><strong class="block">Seg a Sáb</strong>8h às 20h</span>
+          </div>
+          <div class="absolute -right-2 top-16 flex items-center gap-2 rounded-full bg-white/85 px-4 py-2 text-sm font-semibold shadow-lg backdrop-blur sm:-right-6">
+            <Icon name="star-fill" class="size-4 text-caramel" /> 4,9 · 1.200 tutores
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="max-w-xl text-4xl font-semibold sm:text-5xl">Cuidado completo, num só lugar.</h2>
+      <div class="mt-10 grid gap-4 md:grid-cols-4">
+        {services.map((s) => (
+          <article class={`card flex min-h-52 flex-col justify-between rounded-[2rem] p-7 ${s.c}`}>
+            <Icon name={s.i} class="size-9 opacity-90" />
+            <div class="mt-8">
+              <h3 class="text-2xl font-semibold">{s.t}</h3>
+              <p class="mt-2 max-w-sm text-sm opacity-85">{s.d}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Primeira consulta -->
+    <section id="consulta" class="bg-plum-dk py-20 text-cream">
+      <div class="mx-auto max-w-6xl px-5">
+        <h2 class="max-w-xl text-4xl font-semibold sm:text-5xl">Sua primeira consulta, <em class="font-normal italic text-[#e0be82]">sem mistério.</em></h2>
+        <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map(([i, t, d], n) => (
+            <li class="relative border-t border-cream/25 pt-6">
+              <span class="font-display text-5xl text-caramel">{n + 1}</span>
+              <Icon name={i!} class="mt-4 size-7 text-[#e0be82]" />
+              <h3 class="mt-3 text-xl font-semibold">{t}</h3>
+              <p class="mt-1 text-sm text-cream/75">{d}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Equipe -->
+    <section id="equipe" class="mx-auto max-w-6xl px-5 py-20">
+      <h2 class="text-4xl font-semibold sm:text-5xl">Quem cuida do seu pet</h2>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-3">
+        {team.map(([n, r, src, pos, alt]) => (
+          <li class="card overflow-hidden rounded-[2rem] bg-white">
+            <img src={src} alt={alt} loading="lazy" class={`aspect-[4/5] w-full object-cover ${pos}`} />
+            <div class="p-5"><strong class="block font-display text-xl">{n}</strong><span class="text-sm text-plum">{r}</span></div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="mx-auto max-w-6xl px-5 pb-20">
+      <div class="grid gap-8 rounded-[2.5rem] bg-caramel p-8 text-cream sm:p-12 md:grid-cols-2 md:items-center">
+        <div>
+          <h2 class="text-4xl font-semibold sm:text-5xl">Vamos conhecer seu melhor amigo?</h2>
+          <a href={whats} class="btn btn-light mt-7"><Icon name="whatsapp" class="size-5" /> Chamar no WhatsApp</a>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex gap-3"><Icon name="geo-alt" class="mt-1 size-5 shrink-0" /> Rua Exemplo, 000 — Cidade Modelo (endereço fictício)</li>
+          <li class="flex gap-3"><Icon name="clock" class="mt-1 size-5 shrink-0" /> Seg a Sáb, 8h às 20h · Plantão 24h</li>
+          <li class="flex gap-3"><Icon name="envelope" class="mt-1 size-5 shrink-0" /> contato@exemplo.test</li>
+        </ul>
+      </div>
+      <p class="mt-8 text-center text-sm text-plum">© 2026 {clinic}. Página de demonstração. Fotos: <a class="underline" href="https://www.pexels.com">Pexels</a> (licença gratuita); nomes e equipe fictícios.</p>
+    </section>
+
+    <!-- CTA fixo mobile -->
+    <a href={whats} class="btn btn-solid fixed inset-x-5 bottom-4 z-10 justify-center shadow-xl md:hidden">
+      <Icon name="whatsapp" class="size-5" /> Agendar pelo WhatsApp
+    </a>
+  </body>
+</html>

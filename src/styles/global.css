@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+:root {
+  --cream: #f6eee2;
+  --sand: #e8d9c3;
+  --caramel: #a9803f;
+  --caramel-dk: #7d5b27;
+  --plum: #4e424b;
+  --plum-dk: #342c33;
+  --ink: #2b2329;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-caramel: var(--caramel);
+  --color-caramel-dk: var(--caramel-dk);
+  --color-plum: var(--plum);
+  --color-plum-dk: var(--plum-dk);
+  --color-ink: var(--ink);
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: var(--cream); }
+  body { font-family: var(--font-sans); color: var(--ink); background: var(--cream); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :focus-visible { outline: 2px solid var(--caramel-dk); outline-offset: 3px; border-radius: 6px; }
+}
+
+@layer components {
+  .btn { display: inline-flex; min-height: 2.75rem; align-items: center; gap: .5rem; border-radius: 9999px; padding: .75rem 1.5rem; font-weight: 600;
+    transition: transform var(--dur-fast) var(--ease-out), background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+  .btn:active { transform: scale(.97); }
+  .btn-solid { background: var(--plum-dk); color: var(--cream); }
+  .btn-solid:hover { background: var(--caramel-dk); }
+  .btn-light { background: #fff; color: var(--ink); box-shadow: 0 6px 20px -8px rgb(52 44 51 / .35); }
+  .btn-light:hover { box-shadow: 0 10px 26px -8px rgb(52 44 51 / .5); }
+  .card { transition: transform var(--dur-base) var(--ease-out); }
+  .card:hover { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Entrada suave (só opacity/transform) */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise .7s var(--ease-out) both; }
